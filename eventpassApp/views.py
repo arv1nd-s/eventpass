@@ -25,3 +25,9 @@ def eventsPage(request):
     # fill events into the template
 
     return render(request, 'events.html')
+
+def createEvent(request):
+    if request.method == "POST":
+        pass
+    else:
+        return render(request, 'event_create_form.html')
