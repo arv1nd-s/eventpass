@@ -16,10 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from eventpassApp.views import appHome, searchResults, about, eventsPage
+from eventpassApp.views import appHome, searchResults, about, eventsPage, loginPage, signUp
 
 urlpatterns = [
     path('', appHome, name='Home'),
+
+    path('login/', loginPage, name='Login'),
+
+    path('signup/', signUp, name='Signup'),
 
     path('search/', searchResults, name='SearchResults'),
 

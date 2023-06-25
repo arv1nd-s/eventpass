@@ -3,6 +3,12 @@ from django.shortcuts import render
 def appHome(request):
     return render(request, 'index.html')
 
+def signUp(request):
+    return render(request, 'signup.html')
+
+def loginPage(request):
+    return render(request, "login.html")
+
 def about(request):
     return render(request, 'about.html')
 

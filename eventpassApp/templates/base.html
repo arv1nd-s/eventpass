@@ -19,14 +19,14 @@
           </div>
           
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 {% block activePageHome %}{% endblock %}">Home</a></li>
-            <li><a href="#" class="nav-link px-2 {% block activePageEvents %}{% endblock %}">Events</a></li>
-            <li><a href="#" class="nav-link px-2 {% block activePageAbout %}{% endblock %}">About</a></li>
+            <li><a href="/" class="nav-link px-2 {% block activePageHome %}{% endblock %}">Home</a></li>
+            <li><a href="/events" class="nav-link px-2 {% block activePageEvents %}{% endblock %}">Events</a></li>
+            <li><a href="/about" class="nav-link px-2 {% block activePageAbout %}{% endblock %}">About</a></li>
           </ul>
           
           <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-outline-primary me-2">Login</button>
-            <button type="button" class="btn btn-primary">Sign-up</button>
+            <a href="/login"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
+            <a href="/signup"><button type="button" class="btn btn-primary">Sign-up</button></a>
           </div>
         </header>
     </div>
@@ -40,9 +40,9 @@
     <div class="container">
         <footer class="py-3 my-4">
           <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Events</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+            <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Home</a></li>
+            <li class="nav-item"><a href="/events" class="nav-link px-2 text-body-secondary">Events</a></li>
+            <li class="nav-item"><a href="/about" class="nav-link px-2 text-body-secondary">About</a></li>
           </ul>
           <p class="text-center text-body-secondary">EventPass</p>
         </footer>
