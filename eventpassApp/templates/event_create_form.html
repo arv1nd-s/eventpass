@@ -4,20 +4,21 @@
 <!-- FORM -->
 <div class="container">
     <div class="row justify-content-center">
-            <form>
+            <form action="/create-event/" method="post">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="event-title">Event Title</label>
-                    <input type="text" class="form-control" id="event-title" placeholder="Enter event title">
+                    <input type="text" class="form-control" id="event-title" name="event-title" placeholder="Enter event title">
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="organizer">Organizer</label>
-                    <input type="text" class="form-control" id="organizer" placeholder="Enter organizer name">
+                    <input type="text" class="form-control" id="organizer" name="organizer" placeholder="Enter organizer name">
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="event-type">Type/Category</label>
-                    <select class="form-control" id="event-type">
+                    <select class="form-control" id="event-type" name="event-type">
                         <option value="music">Music</option>
                         <option value="conference">Conference</option>
                         <option value="sport">Sport</option>
@@ -29,17 +30,17 @@
                     <p class="card-header">Location</p>
                     <div class="form-group">
                         <label for="location-address">Address</label>
-                        <input type="text" class="form-control" id="location-address" placeholder="Enter event location address">
+                        <input type="text" class="form-control" id="location-address" name="location-address" placeholder="Enter event location address">
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <label for="location-city">City</label>
-                            <input type="text" class="form-control" id="location-city" placeholder="Enter city">
+                            <input type="text" class="form-control" id="location-city" name="location-city"  placeholder="Enter city">
                         </div>
                         <div class="col">
                             <label for="location-pincode">Pincode</label>
-                            <input type="text" class="form-control" id="location-pincode" placeholder="Enter pincode">
+                            <input type="text" class="form-control" id="location-pincode" name="location-pincode"  placeholder="Enter pincode">
                         </div>
                     </div>
 
@@ -49,11 +50,11 @@
                 <div class="row">
                     <div class="col">
                         <label for="start-date">Start Date</label>
-                        <input type="date" class="form-control" id="start-date">
+                        <input type="date" class="form-control" id="start-date" name="start-date">
                     </div>
                     <div class="col">
                         <label for="start-time">Start Time</label>
-                        <input type="time" class="form-control" id="start-time">
+                        <input type="time" class="form-control" id="start-time" name="start-time">
                     </div>
                 </div>
 
@@ -61,23 +62,23 @@
                 <div class="row">
                     <div class="col">
                         <label for="end-date">End Date</label>
-                        <input type="date" class="form-control" id="end-date">
+                        <input type="date" class="form-control" id="end-date" name="end-date">
                     </div>
                     <div class="col">
                         <label for="end-time">End Time</label>
-                        <input type="time" class="form-control" id="end-time">
+                        <input type="time" class="form-control" id="end-time" name="end-time">
                     </div>
                 </div>
 
                 <br>
                 <div class="form-group">
                     <label for="image-upload">Upload Image</label>
-                    <input type="file" class="form-control-file" id="image-upload">
+                    <input type="file" class="form-control-file" id="image-upload" name="image-upload">
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="event-description">Event Description</label>
-                    <textarea class="form-control" id="event-description" rows="5" placeholder="Enter event description"></textarea>
+                    <textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Enter event description"></textarea>
                 </div>
                 <br>
 
