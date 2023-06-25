@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block activePageEvents %}link-secondary{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search by name or location" aria-label="Search" aria-describedby="search-btn">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" id="search-btn">Search</button>
+                    </div>
+                </div>
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="radio" name="search-type" id="search-location" value="location" checked>
+                    <label class="form-check-label" for="search-location">
+                        Search by Location
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="search-type" id="search-name" value="name">
+                    <label class="form-check-label" for="search-name">
+                        Search by Name
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- EVENTS SECTION -->
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        <div class="col shadow-sm">
+            <div class="card">
+                <img class="card-img-top" src="./event.jpeg" alt="Card image">
+                <div class="card-body">
+                  <h4 class="card-title">Event Title</h4>
+                  <h6 class="card-text text-danger">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                      </svg>
+                        Jaipur, Rajasthan
+                  </h6>
+                  <h6 class="card-text text-primary">Sat, Jul 1, 9:00 PM</h6>
+                  <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem laudantium ipsum unde minima consectetur sint dolore ipsa, ab v.</p>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-primary rounded-pill">Register now</button>
+                    <button type="button" class="btn btn-sm text-primary">Learn more</button>
+                  </div>
+                </div>
+            </div>
+        </div>    
+
+        <div class="col shadow-sm">
+            <div class="card">
+                <img class="card-img-top" src="./event.jpeg" alt="Card image">
+                <div class="card-body">
+                  <h4 class="card-title">Event Title</h4>
+                  <h6 class="card-text text-danger">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                      </svg>
+                        Jaipur, Rajasthan
+                  </h6>
+                  <h6 class="card-text text-primary">Sat, Jul 1, 9:00 PM</h6>
+                  <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem laudantium ipsum unde minima consectetur sint dolore ipsa, ab v.</p>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-primary rounded-pill">Register now</button>
+                    <button type="button" class="btn btn-sm text-primary">Learn more</button>
+                  </div>
+                </div>
+            </div>
+        </div>    
+
+        <div class="col shadow-sm">
+            <div class="card">
+                <img class="card-img-top" src="./event.jpeg" alt="Card image">
+                <div class="card-body">
+                  <h4 class="card-title">Event Title</h4>
+                  <h6 class="card-text text-danger">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                      </svg>
+                        Jaipur, Rajasthan
+                  </h6>
+                  <h6 class="card-text text-primary">Sat, Jul 1, 9:00 PM</h6>
+                  <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem laudantium ipsum unde minima consectetur sint dolore ipsa, ab v.</p>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-primary rounded-pill">Register now</button>
+                    <button type="button" class="btn btn-sm text-primary">Learn more</button>
+                  </div>
+                </div>
+            </div>
+        </div>    
+        
+      </div>
+    </div>
+  </div>
+<!-- EVENTS SECTION -->
+{% endblock %}

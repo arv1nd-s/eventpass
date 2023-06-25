@@ -14,3 +14,8 @@ def searchResults(request):
     # fill into the template
 
     return render(request, 'search_results.html')
+
+def eventsPage(request):
+    # fill events into the template
+
+    return render(request, 'events.html')

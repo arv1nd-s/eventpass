@@ -16,13 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from eventpassApp.views import appHome, searchResults, about
+from eventpassApp.views import appHome, searchResults, about, eventsPage
 
 urlpatterns = [
     path('', appHome, name='Home'),
 
     path('search/', searchResults, name='SearchResults'),
 
+    path('events/', eventsPage, name='EventsPage'),
+ 
     path('about/', about, name='About'),
 
     path('admin/', admin.site.urls),
