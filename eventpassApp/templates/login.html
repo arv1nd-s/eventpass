@@ -6,15 +6,16 @@
         <h2>Login</h2>
     </div>
 
-    <form>
+    <form action="/login/" method="post">
+        {% csrf_token %}
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
         </div>
         <br>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
         </div>
         <br>
         <div class="form-group text-center">

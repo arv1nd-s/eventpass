@@ -1,18 +1,60 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .models import Event
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 def appHome(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html', context={'user': request.user})
 
-def signUp(request):
-    return render(request, 'signup.html')
+def signup(request):
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        
+        user = User.objects.create(
+            first_name = request.POST.get('name'),
+            username = request.POST.get('email')
+        )
+        user.set_password(request.POST.get('password'))
+        user.save()
+        return HttpResponseRedirect('/login')
 
-def loginPage(request):
-    return render(request, "login.html")
+    else:
+        return render(request, 'signup.html')
+
+def loginUser(request):
+    if request.method == "POST":
+        username = request.POST.get("email")
+        password = request.POST.get("password")
+
+        if not User.objects.filter(username=username).exists():
+            messages.error(request, 'Invalid Usernaame')
+            return redirect('/login/')
+        
+        user = authenticate(request, username=username, password=password)
+
+        if user is None:
+            messages.error(request, "Invalid Password")
+            return redirect('/login/')
+        else:
+            login(request, user)
+
+        return redirect('/profile/')
+    
+    else:
+        return render(request, "login.html")
+
+
+def profile(request):
+    if request.user.is_authenticated:
+        return render(request, "profile.html", context={'user': request.user})
+    else:
+        return redirect('/login/')
+
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'about.html', context={'user': request.user})        
 
 def searchResults(request):
     # get the searched event name or location
@@ -21,12 +63,12 @@ def searchResults(request):
 
     # fill into the template
 
-    return render(request, 'search_results.html')
+    return render(request, 'search_results.html', context={'user': request.user})
 
 def eventsPage(request):
     # fill events into the template
 
-    return render(request, 'events.html')
+    return render(request, 'events.html', context={'user': request.user})
 
 def createEvent(request):
     if request.method == "POST":
@@ -56,4 +98,4 @@ def createEvent(request):
         return HttpResponseRedirect('/create-event')
 
     else:
-        return render(request, 'event_create_form.html')
+        return render(request, 'event_create_form.html', context={'user': request.user})
