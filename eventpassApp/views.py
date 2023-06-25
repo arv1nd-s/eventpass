@@ -3,6 +3,9 @@ from django.shortcuts import render
 def appHome(request):
     return render(request, 'index.html')
 
+def about(request):
+    return render(request, 'about.html')
+
 def searchResults(request):
     # get the searched event name or location
 
