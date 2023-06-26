@@ -25,6 +25,8 @@ urlpatterns = [
 
     path('signup/', signup, name='Signup'),
 
+    path('logout/', logoutUser, name='Logout'),
+
     path('profile/', profile, name='Profile'),
 
     path('search/', searchResults, name='SearchResults'),

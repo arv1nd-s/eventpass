@@ -2,13 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .models import Event
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 def appHome(request):
     return render(request, 'index.html', context={'user': request.user})
 
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect('/profile')
+
     if request.method == "POST":
         first_name = request.POST.get('first_name')
         
@@ -24,6 +27,9 @@ def signup(request):
         return render(request, 'signup.html')
 
 def loginUser(request):
+    if request.user.is_authenticated:
+        return redirect('/profile')
+
     if request.method == "POST":
         username = request.POST.get("email")
         password = request.POST.get("password")
@@ -44,6 +50,16 @@ def loginUser(request):
     
     else:
         return render(request, "login.html")
+
+def logoutUser(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect('/')
+    
+    if request.user.is_authenticated:
+        return render(request, 'logout.html', context={'user': request.user})
+    else:
+        return redirect('/login')
 
 
 def profile(request):
@@ -89,11 +105,6 @@ def createEvent(request):
             image_path=""
         )
         event_data.save()
-        # print(form_data.get("start-date"))
-        # print(form_data.get("start-time"))
-        # print(form_data.get("end-date"))
-        # print(form_data.get("end-time"))
-        # print(form_data.get("image-upload"))
 
         return HttpResponseRedirect('/create-event')
 
