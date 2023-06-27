@@ -72,37 +72,32 @@ def profile(request):
 def about(request):
     return render(request, 'about.html', context={'user': request.user})        
 
-def searchResults(request):
-    # get the searched event name or location
-
-    # filter it out from db
-
-    # fill into the template
-
-    return render(request, 'search_results.html', context={'user': request.user})
 
 def eventsPage(request):
     # fill events into the template
 
     return render(request, 'events.html', context={'user': request.user})
 
+
 def createEvent(request):
     if request.method == "POST":
         form_data = request.POST.dict()
         print(form_data.items())
 
+        print(request.user.id)
+
         event_data = Event(
             title=form_data.get("event-title"),
             city=form_data.get("location-city"),
             organizer=form_data.get("organizer"),
-            user_id=1,
-            # starts_at="",
-            # ends_at="",
+            user_id=User.objects.get(id=request.user.id),
+            starts_at=form_data.get("start-date-time"),
+            ends_at=form_data.get("end-date-time"),
             address=form_data.get("location-address"),
             pincode=form_data.get("location-pincode"),
             category=form_data.get("event-type"),
             description=form_data.get("event-description"),
-            image_path=""
+            image_path="dummy"
         )
         event_data.save()
 
@@ -111,13 +106,33 @@ def createEvent(request):
     else:
         return render(request, 'event_create_form.html', context={'user': request.user})
     
+
 def myTicketsList(request):
     # get the userid
     # for that userid get the tickets record
     # pass to the template
     return render(request, 'mytickets.html')
 
+
 def showTicket(request):
     # get the userid
     # check if this userid have access to the request ticket using ticket id
     return render(request, 'ticket.html')
+
+# INCOMPLETE
+def searchResults(request):
+    if request.GET.get('search-type') == 'name':
+        user_search = request.GET.get('query')
+        print(user_search)
+        event_records = Event.objects.filter(title__contains=user_search)
+        print(event_records)
+        return render(request, 'events.html', context={'event_records': event_records})
+
+    elif request.GET.get('search-type') == 'location':
+        user_search = request.GET.get('query')
+        event_records = Event.objects.filter(city__contains=user_search)
+        print(event_records)
+        return render(request, 'events.html', context={'event_records': event_records})
+    
+    else:
+        return redirect('/')

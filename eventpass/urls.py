@@ -33,6 +33,8 @@ urlpatterns = [
 
     path('events/', eventsPage, name='EventsPage'),
 
+    # path('view-event/', viewEvent, name='ViewEvent')
+
     path('create-event/', createEvent, name='CreateEvent'),
 
     path('my-tickets/', myTicketsList, name='MyTickets'),
