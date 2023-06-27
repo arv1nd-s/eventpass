@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>My Tickets</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ticket ID</th>
+                <th>Event Name</th>
+                <th>Date & Time</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="/ticket/">123456789</a></td>
+                <td>Event 1</td>
+                <td>June 30, 2023 7:00 PM</td>
+                <td>Location 1</td>
+            </tr>
+            <tr>
+                <td><a href="/ticket/">987654321</a></td>
+                <td>Event 2</td>
+                <td>July 5, 2023 6:30 PM</td>
+                <td>Location 2</td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+</div>
+{% endblock %}

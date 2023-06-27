@@ -1,0 +1,57 @@
+<!-- To show a specific ticket -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card text-center">
+        <div class="card-header">
+            Event Ticket
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Event Name</h5>
+            <p class="card-text">Event Date & Time</p>
+            <p class="card-text">Event Location</p>
+            <hr>
+            <p class="card-text">Ticket Holder: John Doe</p>
+            <p class="card-text">Ticket Type: General Admission</p>
+            <p class="card-text">Ticket ID: 123456789</p>
+            <hr>
+            <div id="qrcode"></div>
+            <hr>
+            <div class="text-center">
+                <a href="#" class="btn btn-primary" onclick="downloadAsImage()">Download as Image</a>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            This ticket is valid for single use only.
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const ticketID = "123456789"; // Replace with the actual ticket ID
+
+    const qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: ticketID,
+        width: 128,
+        height: 128
+    });
+
+    function downloadAsImage() {
+        const cardBody = document.querySelector(".card-body");
+
+        html2canvas(cardBody).then(canvas => {
+            const imgData = canvas.toDataURL("image/png");
+            const link = document.createElement("a");
+            link.href = imgData;
+            link.download = "ticket.png";
+            link.click();
+        });
+    }
+</script>
+{% endblock %}

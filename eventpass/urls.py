@@ -34,6 +34,10 @@ urlpatterns = [
     path('events/', eventsPage, name='EventsPage'),
 
     path('create-event/', createEvent, name='CreateEvent'),
+
+    path('my-tickets/', myTicketsList, name='MyTickets'),
+
+    path('ticket/', showTicket, name='Ticket'),
  
     path('about/', about, name='About'),
 

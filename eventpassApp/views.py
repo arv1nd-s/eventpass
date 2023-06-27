@@ -110,3 +110,14 @@ def createEvent(request):
 
     else:
         return render(request, 'event_create_form.html', context={'user': request.user})
+    
+def myTicketsList(request):
+    # get the userid
+    # for that userid get the tickets record
+    # pass to the template
+    return render(request, 'mytickets.html')
+
+def showTicket(request):
+    # get the userid
+    # check if this userid have access to the request ticket using ticket id
+    return render(request, 'ticket.html')
