@@ -81,31 +81,35 @@ def eventsPage(request):
 
 
 def createEvent(request):
-    if request.method == "POST":
-        form_data = request.POST.dict()
-        print(form_data.items())
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form_data = request.POST.dict()
+            print(form_data.items())
 
-        print(request.user.id)
+            print(request.user.id)
 
-        event_data = Event(
-            title=form_data.get("event-title"),
-            city=form_data.get("location-city"),
-            organizer=form_data.get("organizer"),
-            user_id=User.objects.get(id=request.user.id),
-            starts_at=form_data.get("start-date-time"),
-            ends_at=form_data.get("end-date-time"),
-            address=form_data.get("location-address"),
-            pincode=form_data.get("location-pincode"),
-            category=form_data.get("event-type"),
-            description=form_data.get("event-description"),
-            image_path="dummy"
-        )
-        event_data.save()
+            event_data = Event(
+                title=form_data.get("event-title"),
+                city=form_data.get("location-city"),
+                organizer=form_data.get("organizer"),
+                user_id=User.objects.get(id=request.user.id),
+                starts_at=form_data.get("start-date-time"),
+                ends_at=form_data.get("end-date-time"),
+                address=form_data.get("location-address"),
+                pincode=form_data.get("location-pincode"),
+                category=form_data.get("event-type"),
+                description=form_data.get("event-description"),
+                image_path="dummy"
+            )
+            event_data.save()
 
-        return HttpResponseRedirect('/create-event')
+            return HttpResponseRedirect('/create-event')
 
+        else:
+            return render(request, 'event_create_form.html', context={'user': request.user})
+        
     else:
-        return render(request, 'event_create_form.html', context={'user': request.user})
+        return redirect('/login')
     
 
 def myTicketsList(request):
@@ -120,19 +124,15 @@ def showTicket(request):
     # check if this userid have access to the request ticket using ticket id
     return render(request, 'ticket.html')
 
-# INCOMPLETE
 def searchResults(request):
     if request.GET.get('search-type') == 'name':
         user_search = request.GET.get('query')
-        print(user_search)
         event_records = Event.objects.filter(title__icontains=user_search)
-        print(event_records)
         return render(request, 'events.html', context={'event_records': event_records})
 
     elif request.GET.get('search-type') == 'location':
         user_search = request.GET.get('query')
         event_records = Event.objects.filter(city__icontains=user_search)
-        print(event_records)
         return render(request, 'events.html', context={'event_records': event_records})
     
     elif request.GET.get('query'):
