@@ -4,6 +4,7 @@ from .models import Event
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.db.models import Q
 
 def appHome(request):
     return render(request, 'index.html', context={'user': request.user})
@@ -124,15 +125,26 @@ def searchResults(request):
     if request.GET.get('search-type') == 'name':
         user_search = request.GET.get('query')
         print(user_search)
-        event_records = Event.objects.filter(title__contains=user_search)
+        event_records = Event.objects.filter(title__icontains=user_search)
         print(event_records)
         return render(request, 'events.html', context={'event_records': event_records})
 
     elif request.GET.get('search-type') == 'location':
         user_search = request.GET.get('query')
-        event_records = Event.objects.filter(city__contains=user_search)
+        event_records = Event.objects.filter(city__icontains=user_search)
         print(event_records)
         return render(request, 'events.html', context={'event_records': event_records})
     
+    elif request.GET.get('query'):
+        # By city and title
+        user_search = request.GET.get('query')
+
+        query = Q(title__icontains=user_search)
+        query.add(Q(city__icontains=user_search), Q.OR)
+
+        event_records = Event.objects.filter(query)
+
+        return render(request, 'events.html', context={'event_records': event_records})
+
     else:
         return redirect('/')

@@ -19,16 +19,18 @@
           </div>
         </div>
         <br>
-        <div class="input-group justify-content-center">
-          <div class="form-outline">
-            <input id="search-input" type="search" id="form1" class="form-control" placeholder="Search for events"/>
-          </div>
-        </div>
-        
-        <div class="lc-block">
-                <a class="btn btn-dark" href="#" role="button">Search</a>
+        <form action="/search/" method="get">
+          <div class="input-group justify-content-center">
+            <div class="form-outline">
+              <input id="search-input" type="search" name="query" id="form1" class="form-control" placeholder="Search for events"/>
             </div>
-        </div>
+          </div>
+          
+          <div class="lc-block">
+                  <button class="btn btn-dark" type="submit">Search</button>
+              </div>
+          </div>
+        </form>
       </div> 
       <!-- /HERO SECTION -->
       
