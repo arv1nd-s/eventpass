@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from .models import Event
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db.models import Q
+from django.core.files.storage import FileSystemStorage
 
 def appHome(request):
     return render(request, 'index.html', context={'user': request.user})
@@ -22,7 +23,7 @@ def signup(request):
         )
         user.set_password(request.POST.get('password'))
         user.save()
-        return HttpResponseRedirect('/login')
+        return redirect('/login')
 
     else:
         return render(request, 'signup.html')
@@ -84,14 +85,10 @@ def createEvent(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             form_data = request.POST.dict()
-            print(form_data.items())
-
-            print(request.user.id)
 
             event_data = Event(
                 title=form_data.get("event-title"),
                 city=form_data.get("location-city"),
-                organizer=form_data.get("organizer"),
                 user_id=User.objects.get(id=request.user.id),
                 starts_at=form_data.get("start-date-time"),
                 ends_at=form_data.get("end-date-time"),
@@ -99,11 +96,12 @@ def createEvent(request):
                 pincode=form_data.get("location-pincode"),
                 category=form_data.get("event-type"),
                 description=form_data.get("event-description"),
-                image_path="dummy"
+                image=request.FILES.get("image-upload"),
+                ticket_price=form_data.get("ticket-price")
             )
             event_data.save()
 
-            return HttpResponseRedirect('/create-event')
+            return redirect('/create-event')
 
         else:
             return render(request, 'event_create_form.html', context={'user': request.user})
@@ -133,6 +131,10 @@ def searchResults(request):
     elif request.GET.get('search-type') == 'location':
         user_search = request.GET.get('query')
         event_records = Event.objects.filter(city__icontains=user_search)
+
+        for event in event_records:
+            print(event.__dict__)
+
         return render(request, 'events.html', context={'event_records': event_records})
     
     elif request.GET.get('query'):
@@ -148,3 +150,12 @@ def searchResults(request):
 
     else:
         return redirect('/')
+
+def viewEvent(request):
+    event_id = request.GET.get('id')
+    if event_id:
+        event = Event.objects.get(id=event_id)
+        organizer = User.objects.get(id=event.user_id_id).first_name
+        return render(request, 'view_event.html', context={'event': event, 'organizer': organizer})
+    else:
+        return HttpResponse(status=204)
