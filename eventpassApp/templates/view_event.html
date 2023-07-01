@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ <div class="container">
+        <div class="text-center">
+            <img src="/media/{{ event.image }}" class="rounded mw-100" alt="Event Image">
+          </div>
+          <br>
+        <div class="row">
+            <div class="col-8">
+                <!-- Image -->
+                <h2>{{ event.title }}</h2>
+                <h6 class="text-danger">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                      <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                    </svg>
+                      {{ event.city }}
+                </h6>
+                <h6 class="text-primary">{{ event.starts_at }}</h6>
+                <div>
+                    {% load static %}
+                    <img class="rounded-circle" alt="avatar1" src="{% static 'eventpassApp/user_icon.png' %}" style="width:3em; display: inline;"/>
+                    <h5 style="display:inline">{{ organizer }}</h5>
+                </div>
+        
+                <p>{{ event.description }}</p>
+            </div>
+
+            <div class="col-4">
+                <div class="card text-center">
+                    <h6 class="card-header text-primary">Buy Ticket</h6>
+                    <!-- <h3 class="price">{{ event.ticket_price }}</h3> -->
+                    <h3 class="price">$ XX</h3>
+                    <button class="btn btn-success rounded-pill btn-sm align-self-center" href="" style="width:70%">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

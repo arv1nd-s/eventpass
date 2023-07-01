@@ -38,7 +38,7 @@
       {% for event in event_records %}
         <div class="col shadow-sm">
             <div class="card">
-                <img class="card-img-top" src="{{ event.image_path }}" alt="Card image">
+                <img class="card-img-top" src="/media/{{ event.image }}" alt="Card image">
                 <div class="card-body">
                   <h4 class="card-title">{{ event.title }}</h4>
                   <h6 class="card-text text-danger">
@@ -50,8 +50,8 @@
                   <h6 class="card-text text-primary">{{ event.starts_at }}</h6>
                   <p class="card-text">{{ event.description }}</p>
                   <div class="btn-group">
-                    <button type="button" href="/view-event?id={{ event.id }}" class="btn btn-sm btn-primary rounded-pill">Register now</button>
-                    <button type="button" href="/view-event?id={{ event.id }}" class="btn btn-sm text-primary">Learn more</button>
+                    <a href="/view-event?id={{ event.id }}"><button type="button" class="btn btn-sm btn-primary rounded-pill">Register now</button></a>
+                    <a href="/view-event?id={{ event.id }}"><button type="button" href="/view-event?id={{ event.id }}" class="btn btn-sm text-primary">Learn more</button></a>
                   </div>
                 </div>
             </div>

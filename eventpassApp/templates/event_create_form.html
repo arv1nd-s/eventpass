@@ -4,16 +4,11 @@
 <!-- FORM -->
 <div class="container">
     <div class="row justify-content-center">
-            <form action="/create-event/" method="post">
+            <form action="/create-event/" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="event-title">Event Title</label>
                     <input type="text" class="form-control" id="event-title" name="event-title" placeholder="Enter event title">
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="organizer">Organizer</label>
-                    <input type="text" class="form-control" id="organizer" name="organizer" placeholder="Enter organizer name">
                 </div>
                 <br>
                 <div class="form-group">
@@ -60,12 +55,18 @@
                 <br>
                 <div class="form-group">
                     <label for="image-upload">Upload Image</label>
-                    <input type="file" class="form-control-file" id="image-upload" name="image-upload">
+                    <input type="file" class="form-control-file" id="imagefile" name="image-upload">
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="event-description">Event Description</label>
                     <textarea class="form-control" id="event-description" name="event-description" rows="5" placeholder="Enter event description"></textarea>
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label for="ticket-price">Ticket Price</label>
+                    <input type="number" class="form-control" id="ticket-price" name="ticket-price">
                 </div>
                 <br>
 
