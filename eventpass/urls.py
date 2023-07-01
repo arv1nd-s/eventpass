@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from eventpassApp.views import *
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', appHome, name='Home'),
@@ -24,7 +26,7 @@ urlpatterns = [
     path('login/', loginUser, name='Login'),
 
     path('signup/', signup, name='Signup'),
-
+ 
     path('logout/', logoutUser, name='Logout'),
 
     path('profile/', profile, name='Profile'),
@@ -33,7 +35,7 @@ urlpatterns = [
 
     path('events/', eventsPage, name='EventsPage'),
 
-    # path('view-event/', viewEvent, name='ViewEvent')
+    path('view-event/', viewEvent, name='ViewEvent'),
 
     path('create-event/', createEvent, name='CreateEvent'),
 
@@ -45,3 +47,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 ]
+
+# https://testdriven.io/blog/django-static-files/
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
