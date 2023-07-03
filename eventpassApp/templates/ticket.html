@@ -8,13 +8,13 @@
             Event Ticket
         </div>
         <div class="card-body">
-            <h5 class="card-title">Event Name</h5>
-            <p class="card-text">Event Date & Time</p>
-            <p class="card-text">Event Location</p>
+            <h5 class="card-title">{{ ticket.ename }}</h5>
+            <p class="card-text">{{ ticket.dateTime }}</p>
+            <p class="card-text">{{ ticket.location }}</p>
             <hr>
-            <p class="card-text">Ticket Holder: John Doe</p>
-            <p class="card-text">Ticket Type: General Admission</p>
-            <p class="card-text">Ticket ID: 123456789</p>
+            <p class="card-text">Ticket Holder: {{ ticket.holder }}</p>
+            <!-- <p class="card-text">Ticket Type: General Admission</p> -->
+            <p class="card-text">Ticket ID: {{ ticket.id }}</p>
             <hr>
             <div id="qrcode"></div>
             <hr>
@@ -34,7 +34,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    const ticketID = "123456789"; // Replace with the actual ticket ID
+    const ticketID = {{ ticket.id }}; // Replace with the actual ticket ID
 
     const qrcode = new QRCode(document.getElementById("qrcode"), {
         text: ticketID,

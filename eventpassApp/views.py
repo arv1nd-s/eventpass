@@ -133,9 +133,22 @@ def myTicketsList(request):
 
 
 def showTicket(request):
-    # get the userid
+    ticket_id = request.GET.get('id')
+    user_id = request.user.id
+    ticket_record = Booking.objects.get(id=ticket_id)
     # check if this userid have access to the request ticket using ticket id
-    return render(request, 'ticket.html')
+    if ticket_record.user_id.id == user_id:
+        ticket = {}
+        ticket['id'] = ticket_record.id
+        ticket['ename'] = ticket_record.event_id.title
+        ticket['dateTime'] = ticket_record.event_id.starts_at
+        ticket['location'] = ticket_record.event_id.city
+        ticket['holder'] = ticket_record.user_id.first_name
+
+        return render(request, 'ticket.html', context={'ticket': ticket})
+    else:
+        return redirect('/my-tickets')
+        
 
 def searchResults(request):
     if request.GET.get('search-type') == 'name':
