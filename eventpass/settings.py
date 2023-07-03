@@ -76,12 +76,13 @@ WSGI_APPLICATION = 'eventpass.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'eventpass',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql',
+        'URL': 'postgresql://postgres:Sbw6y0B1VDmJtN4yISKC@containers-us-west-208.railway.app:5759/railway',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'Sbw6y0B1VDmJtN4yISKC',
+        'HOST': 'containers-us-west-208.railway.app',
+        'PORT': '5759',
     }
 }
 
