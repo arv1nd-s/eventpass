@@ -11,7 +11,7 @@ class Event(models.Model):
     pincode = models.IntegerField()
     category = models.CharField(max_length=50)
     description = models.TextField()
-    image = models.FileField(upload_to="event-images")
+    image = models.CharField(max_length=100)
     ticket_price = models.IntegerField()
 
 class Booking(models.Model):

@@ -3,7 +3,7 @@
 {% block content %}
  <div class="container">
         <div class="text-center">
-            <img src="/media/{{ event.image }}" class="rounded mw-100" alt="Event Image">
+            <img src="{{ event.image }}" class="rounded mw-100" alt="Event Image">
           </div>
           <br>
         <div class="row">
@@ -19,7 +19,7 @@
                 <h6 class="text-primary">{{ event.starts_at }}</h6>
                 <div>
                     {% load static %}
-                    <img class="rounded-circle" alt="avatar1" src="{% static 'eventpassApp/user_icon.png' %}" style="width:3em; display: inline;"/>
+                    <img class="rounded-circle" alt="avatar1" src="/static/eventpassApp/user_icon.png" style="width:3em; display: inline;"/>
                     <h5 style="display:inline">{{ organizer }}</h5>
                 </div>
         

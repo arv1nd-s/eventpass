@@ -7,8 +7,17 @@ from django.contrib import messages
 from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 
+# --- Image Upload to CDN ---
+import os
+import base64
+import requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+# ---------------------------
+
 def appHome(request):
-    return render(request, 'index.html', context={'user': request.user})
+    event_records = Event.objects.all().order_by('id')[:5]
+    return render(request, 'index.html', context={'user': request.user, 'event_records': event_records})
 
 def signup(request):
     if request.user.is_authenticated:
@@ -86,6 +95,22 @@ def createEvent(request):
         if request.method == "POST":
             form_data = request.POST.dict()
 
+            # ---- Upload image to a CDN ----
+            usr_image = request.FILES.get("image-upload")
+            usr_image_b64 = base64.b64encode(usr_image.read())
+
+            response = requests.post(
+                'https://api.imgbb.com/1/upload',
+                params={
+                    'key': os.environ.get("IMGBB_KEY")
+                },
+                files={
+                    'image': (None, usr_image_b64)
+                }
+            )
+            usr_image_cdn_url = response.json()['data']['url']
+            # -------------------------------
+
             event_data = Event(
                 title=form_data.get("event-title"),
                 city=form_data.get("location-city"),
@@ -96,7 +121,7 @@ def createEvent(request):
                 pincode=form_data.get("location-pincode"),
                 category=form_data.get("event-type"),
                 description=form_data.get("event-description"),
-                image=request.FILES.get("image-upload"),
+                image=usr_image_cdn_url,
                 ticket_price=form_data.get("ticket-price")
             )
             event_data.save()
@@ -159,9 +184,6 @@ def searchResults(request):
     elif request.GET.get('search-type') == 'location':
         user_search = request.GET.get('query')
         event_records = Event.objects.filter(city__icontains=user_search)
-
-        for event in event_records:
-            print(event.__dict__)
 
         return render(request, 'events.html', context={'event_records': event_records})
     
