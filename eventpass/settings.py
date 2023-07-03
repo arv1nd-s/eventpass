@@ -9,8 +9,11 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+from dotenv import load_dotenv
 import os
 from pathlib import Path
+
+load_dotenv('.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +28,7 @@ SECRET_KEY = 'django-insecure-ca*%+2f29o51(2^1sor2g3006mxzm07z+#kwuf2u4ru+7!-=85
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['eventpass-git-vercel-arv1nd-s.vercel.app']
+ALLOWED_HOSTS = ['eventpass-git-vercel-arv1nd-s.vercel.app', '127.0.0.1']
 
 
 # Application definition
@@ -77,12 +80,12 @@ WSGI_APPLICATION = 'eventpass.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'URL': 'postgresql://postgres:Sbw6y0B1VDmJtN4yISKC@containers-us-west-208.railway.app:5759/railway',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'Sbw6y0B1VDmJtN4yISKC',
-        'HOST': 'containers-us-west-208.railway.app',
-        'PORT': '5759',
+        'URL': os.environ.get("DBURL"),
+        'NAME': os.environ.get("DBNAME"),
+        'USER': os.environ.get("DBUSER"),
+        'PASSWORD': os.environ.get("DBPASSWORD"),
+        'HOST': os.environ.get("DBHOST"),
+        'PORT': os.environ.get("DBPORT"),
     }
 }
 
