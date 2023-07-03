@@ -13,19 +13,14 @@
             </tr>
         </thead>
         <tbody>
+            {% for ticket in tickets_data %}
             <tr>
-                <td><a href="/ticket/">123456789</a></td>
-                <td>Event 1</td>
-                <td>June 30, 2023 7:00 PM</td>
-                <td>Location 1</td>
+                <td><a href="/ticket?id={{ ticket.id }}">{{ ticket.id }}</a></td>
+                <td>{{ ticket.event_name }}</td>
+                <td>{{ ticket.dateTime }}</td>
+                <td>{{ ticket.location }}</td>
             </tr>
-            <tr>
-                <td><a href="/ticket/">987654321</a></td>
-                <td>Event 2</td>
-                <td>July 5, 2023 6:30 PM</td>
-                <td>Location 2</td>
-            </tr>
-            <!-- Add more rows as needed -->
+            {% endfor %}
         </tbody>
     </table>
 </div>

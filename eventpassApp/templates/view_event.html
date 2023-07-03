@@ -30,8 +30,8 @@
                 <div class="card text-center">
                     <h6 class="card-header text-primary">Buy Ticket</h6>
                     <!-- <h3 class="price">{{ event.ticket_price }}</h3> -->
-                    <h3 class="price">$ XX</h3>
-                    <button class="btn btn-success rounded-pill btn-sm align-self-center" href="" style="width:70%">Buy Now</button>
+                    <h3 class="price">$ {{ event.ticket_price }}</h3>
+                    <a href="/buy-ticket?id={{ event.id }}"><button class="btn btn-success rounded-pill btn-sm align-self-center" style="width:70%">Buy Now</button></a>
                 </div>
             </div>
         </div>

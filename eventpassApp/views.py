@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Event
+from .models import Event, Booking
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -111,10 +111,25 @@ def createEvent(request):
     
 
 def myTicketsList(request):
-    # get the userid
-    # for that userid get the tickets record
-    # pass to the template
-    return render(request, 'mytickets.html')
+    if request.user.is_authenticated:
+        # get the userid
+        user_id = request.user.id
+        # for that userid get the tickets record
+        ticket_records = Booking.objects.filter(user_id=user_id)
+        tickets_data = []
+        for t_record in ticket_records:
+            ticket = {}
+            event_record = t_record.event_id
+            ticket['id'] = t_record.id
+            ticket['event_name'] = event_record.title
+            ticket['dateTime'] = event_record.starts_at
+            ticket['location'] = event_record.city
+            tickets_data.append(ticket)
+        
+        # pass to the template
+        return render(request, 'mytickets.html', context={'tickets_data': tickets_data})
+    else:
+        return redirect('/login')
 
 
 def showTicket(request):
@@ -159,3 +174,18 @@ def viewEvent(request):
         return render(request, 'view_event.html', context={'event': event, 'organizer': organizer})
     else:
         return HttpResponse(status=204)
+
+def buyTicket(request):
+    if request.user.is_authenticated:
+        event_id = request.GET.get('id')
+
+        event_record = Event.objects.get(id=event_id)
+        user_record = User.objects.get(id=request.user.id)
+        Booking.objects.create(
+            event_id=event_record,
+            user_id=user_record
+        )
+        return redirect('/my-tickets')
+
+    else:
+        return redirect('/login')
